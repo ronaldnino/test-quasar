@@ -189,21 +189,7 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'renap-client',
-        "win": {
-          "target":[
-            "nsis"
-          ],
-          "icon": "icon.ico"
-        },
-        "nsis": {
-          "oneClick": true,
-          "installerIcon": "icon.ico",
-          "uninstallerIcon": "icon.ico",
-          "uninstallerDisplayName": "my-app-un...",
-          "license": "license.md",
-          "allowToChangeInstallationDirectory": false
-        }
+        appId: 'renap-client'
       }
     },
 
