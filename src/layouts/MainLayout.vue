@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Consulta
+
         </q-toolbar-title>
 
-        <div>versión 0.1</div>
+        <div>versión 0.7</div>
       </q-toolbar>
     </q-header>
 
@@ -28,14 +28,61 @@
         <q-item-label
           header
         >
-          Essential Links
+          Enlaces esenciales
         </q-item-label>
+        <q-item
+          clickable
+          target="_blank"
+          href="https://www.renap.gob.gt/"
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        >
+          <q-item-section
+            avatar
+          >
+            <q-icon name="public" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Sitio Web</q-item-label>
+            <q-item-label caption>www.renap.gob.gt</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item
+          clickable
+
+          @click="navegar_login"
+        >
+          <q-item-section
+            avatar
+          >
+            <q-icon name="no_encryption" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Obtener Token</q-item-label>
+            <q-item-label caption>renap.consultas-genericas.token</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item
+          clickable
+
+          @click="navegar_query"
+        >
+          <q-item-section
+            avatar
+          >
+            <q-icon name="search" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Consulta</q-item-label>
+            <q-item-label caption>renap.consultas-genericas.busqueda</q-item-label>
+          </q-item-section>
+        </q-item>
+
+
       </q-list>
     </q-drawer>
 
@@ -47,69 +94,35 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { useRouter } from "vue-router";
 
-const linksList = [
-  {
-    title: 'Sitio Web',
-    caption: 'www.renap.gob.gt',
-    icon: 'school',
-    link: 'https://www.renap.gob.gt/'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
+
+const router = useRouter();
+
+
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+
   },
 
   setup () {
     const leftDrawerOpen = ref(false)
-
+    const router = useRouter();
     return {
-      essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      },
+      navegar_login () {
+        router.push('/login');
+      },
+      navegar_query () {
+        router.push('/query');
+      },
+      router
     }
   }
 })
